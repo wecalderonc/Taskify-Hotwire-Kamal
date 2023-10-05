@@ -22,19 +22,20 @@ FROM base as build
 
 # Install packages needed to build gems
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential pkg-config
+    apt-get install --no-install-recommends -y build-essential pkg-config libsqlite3-dev
 
+#RUN gem install nokogiri --platform=ruby
 # Install application gems
 COPY --link Gemfile Gemfile.lock ./
 RUN bundle install && \
-    bundle exec bootsnap precompile --gemfile && \
+    # bundle exec bootsnap precompile --gemfile && \
     rm -rf ~/.bundle/ $BUNDLE_PATH/ruby/*/cache $BUNDLE_PATH/ruby/*/bundler/gems/*/.git
 
 # Copy application code
 COPY --link . .
 
 # Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+# RUN bundle exec bootsnap precompile app/ lib/
 
 # Precompiling assets for production without requiring secret RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE=DUMMY ./bin/rails assets:precompile
