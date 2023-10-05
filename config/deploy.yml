@@ -6,7 +6,8 @@ image: wecalderonc/task-app
 
 # Deploy to these servers.
 servers:
-  - 192.168.0.1
+  - 159.223.172.219
+  - 167.99.233.212
 
 # Credentials for your image host.
 registry:
@@ -22,7 +23,7 @@ registry:
 # Remember to run `kamal env push` after making changes!
 env:
   clear:
-    DB_HOST: 192.168.0.2
+    DB_HOST: 24.199.90.159
   secret:
     - RAILS_MASTER_KEY
 # Use a different ssh user than root
