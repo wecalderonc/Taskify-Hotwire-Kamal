@@ -74,3 +74,5 @@ end
 gem "tailwindcss-rails", "~> 2.0"
 
 gem "kamal", "~> 1.0"
+
+gem "dockerfile-rails", ">= 1.5", :group => :development
